@@ -1,4 +1,4 @@
-package com.iteach
+package com.curapp
 
 import android.app.Application
 import com.facebook.react.PackageList
