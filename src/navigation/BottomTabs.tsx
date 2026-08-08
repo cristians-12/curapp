@@ -1,19 +1,17 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import History from '@/pages/History';
-import Home from '@/pages/Home';
 import Profile from '@/pages/Profile';
-import {colors} from '@/theme';
-import type {BottomTabsParamList} from '@/types/navigation';
+import { colors } from '@/theme';
+import type { BottomTabsParamList } from '@/types/navigation';
 
-import {styles} from './styles';
+import { styles } from './styles';
+import HomeScreen from '@/pages/Home';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
-// Los tipos de react-native-vector-icons v10 no son compatibles con
-// @types/react 18.3 (error TS2786), así que se tipa manualmente el componente.
 const TabIcon = Ionicons as unknown as React.ComponentType<{
   name: string;
   size: number;
@@ -22,22 +20,22 @@ const TabIcon = Ionicons as unknown as React.ComponentType<{
 
 const TAB_ICONS: Record<
   keyof BottomTabsParamList,
-  {active: string; inactive: string}
+  { active: string; inactive: string }
 > = {
-  HomeTab: {active: 'home', inactive: 'home-outline'},
-  HistoryTab: {active: 'time', inactive: 'time-outline'},
-  Profile: {active: 'person', inactive: 'person-outline'},
+  HomeTab: { active: 'home', inactive: 'home-outline' },
+  HistoryTab: { active: 'time', inactive: 'time-outline' },
+  Profile: { active: 'person', inactive: 'person-outline' },
 };
 
 function BottomTabs(): React.JSX.Element {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textSecondary,
+        tabBarInactiveTintColor: colors.secondary,
         tabBarHideOnKeyboard: true,
-        tabBarIcon: ({color, focused, size}) => {
+        tabBarIcon: ({ color, focused, size }) => {
           const icons = TAB_ICONS[route.name];
           return (
             <TabIcon
@@ -48,14 +46,14 @@ function BottomTabs(): React.JSX.Element {
           );
         },
       })}>
-      <Tab.Screen name="HomeTab" component={Home} options={{title: 'Inicio'}} />
+      <Tab.Screen name="HomeTab" component={HomeScreen} options={{ title: 'Inicio' }} />
       <Tab.Screen
         name="HistoryTab"
         component={History}
         options={{
           title: 'Historial',
           headerShown: true,
-          headerStyle: {backgroundColor: colors.primary},
+          headerStyle: { backgroundColor: colors.primary },
           headerTitleStyle: styles.titleStyle,
           headerTitleAlign: 'center',
         }}
@@ -66,7 +64,7 @@ function BottomTabs(): React.JSX.Element {
         options={{
           title: 'Perfil',
           headerShown: true,
-          headerStyle: {backgroundColor: colors.primary},
+          headerStyle: { backgroundColor: colors.primary },
           headerTitleStyle: styles.titleStyle,
           headerTitleAlign: 'center',
         }}
