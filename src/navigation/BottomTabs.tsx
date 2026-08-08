@@ -1,7 +1,7 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import {Icon} from '@/components/atoms';
 import History from '@/pages/History';
 import Profile from '@/pages/Profile';
 import { colors } from '@/theme';
@@ -11,12 +11,6 @@ import { styles } from './styles';
 import HomeScreen from '@/pages/Home';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
-
-const TabIcon = Ionicons as unknown as React.ComponentType<{
-  name: string;
-  size: number;
-  color: string;
-}>;
 
 const TAB_ICONS: Record<
   keyof BottomTabsParamList,
@@ -38,7 +32,7 @@ function BottomTabs(): React.JSX.Element {
         tabBarIcon: ({ color, focused, size }) => {
           const icons = TAB_ICONS[route.name];
           return (
-            <TabIcon
+            <Icon
               name={focused ? icons.active : icons.inactive}
               size={size}
               color={color}
