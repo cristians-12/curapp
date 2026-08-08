@@ -12,6 +12,7 @@ src/
 │   ├── organisms/    # Secciones completas: Header, Card, ProductList...
 │   └── templates/    # Layouts que posicionan organismos
 ├── pages/            # Nivel "pages": pantallas finales (usa los templates)
+├── navigation/       # RootStack, BottomTabs, navigationRef (patrón iteach)
 ├── theme/            # Design tokens: colors, typography, spacing
 ├── store/            # Redux Toolkit + Redux Saga
 │   ├── slices/       # Slices de estado por feature
@@ -60,5 +61,20 @@ src/
 1. Agrega un átomo: `src/components/atoms/Button/index.tsx`.
 2. Úsalo en una molécula u organismo, luego en un template.
 3. Crea una página en `src/pages/` que consuma el template y conecte el store.
-4. Registra la página en tu navegación (React Navigation).
-5. Conecta el `Provider` de Redux en `App.tsx` con el store de `@/store`.
+4. Registra la pantalla en `src/navigation/RootStack.tsx` (o en `BottomTabs.tsx`)
+   y agrega sus parámetros a `RootStackParamList` / `BottomTabsParamList`
+   en `src/types/navigation.ts`.
+5. Para navegar desde fuera de componentes (sagas, servicios) usa
+   `navigationRef` / `resetTo` de `@/navigation`.
+
+> `App.tsx` ya monta el `Provider` de Redux y el `NavigationContainer`
+> con el `RootStack` (equivalente al `AppContent` del proyecto de referencia).
+
+## Pendientes (siguientes pasos)
+
+- **Ciclo de vida del token**: manejo de `401` y renovación con `refreshToken`
+  (el cliente ya adjunta el `accessToken` desde Keychain).
+- **Deep linking** (`src/navigation/linking/`): el proyecto de referencia (iteach)
+  lo incluye en su carpeta de navegación; pendiente de portar.
+- Conectar el `Provider` de Redux y la navegación en `App.tsx`.
+- Tests unitarios para `services/api`, `services/storage` y `store`.

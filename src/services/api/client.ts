@@ -26,10 +26,14 @@ apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) =>
 apiClient.interceptors.response.use(
   response => response,
   (error: AxiosError) => {
+    if (axios.isCancel(error)) {
+      return Promise.reject(error);
+    }
     const data = error.response?.data as {message?: string} | undefined;
     const apiError: ApiError = {
       status: error.response?.status,
       message: data?.message ?? error.message ?? 'Error de red inesperado',
+      details: error.response?.data,
     };
     return Promise.reject(apiError);
   },
