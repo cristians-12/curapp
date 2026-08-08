@@ -117,3 +117,11 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+// react-native-vector-icons: copia las fuentes de íconos a los assets durante
+// el build. Agregar aquí las familias que se usen (ej. MaterialIcons.ttf).
+project.ext.vectoricons = [
+    iconFontNames: ['Ionicons.ttf']
+]
+
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")

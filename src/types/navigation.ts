@@ -12,6 +12,8 @@ import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 export type RootStackParamList = {
   Splash: undefined;
   Home: undefined;
+  Register: undefined;
+  Login: undefined;
 };
 
 /** Parámetros de las tabs inferiores. */
